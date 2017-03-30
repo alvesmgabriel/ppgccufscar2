@@ -1,0 +1,33 @@
+\documentclass[english, qualit]{ppgccufscar2}
+
+\usepackage{lipsum}
+
+\titulo{Exemplo de titulo grande para ocupar mais de uma linha xemplo de titulo grande para ocupar mais de uma linha}
+\autor{Fulano de Tal}
+\orientador[Orientadora:]{Profa. Dra. Fulana de Tal}
+\coorientador[Co-orientador:]{Prof. Dr. Beltrano da Silva}
+\areaconcentracao{Engenharia de Software}
+\data{Abril, 2017}
+
+
+\begin{document}
+	\selectlanguage{english}
+	\imprimircapa
+	\imprimirfolhaderosto
+	\textual
+	\chapter{Teste das opções}
+	\PPGtipodoc\ possui titulo \PPGtipotitulo.
+	\imprimirpreambulo
+	\chapter{Primeiro Capítulo}	
+	\lipsum \cite{2004_kitchenham}
+	Segundo \citeonline{2007_montebelo}, \lipsum
+	
+	\chapter{Segundo Capítulo}
+	Ainda de acordo com \citeonline{2004_kitchenham}, \lipsum
+	
+	\postextual
+	% ----------------------------------------------------------
+	% Referências bibliográficas
+	% ----------------------------------------------------------
+	\bibliography{refs-big-data}
+\end{document}
