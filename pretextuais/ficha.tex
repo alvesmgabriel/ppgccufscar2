@@ -1,0 +1,44 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ficha.tex, criado em 11-04-2016
+% autor: gabriel marcelino alves
+% descricao: arquivo de exemplo de ficha catalográfica do trabalho
+%
+% obs.: Exemplo extraído do material da abnTeX2
+% ------------------------------------------------------------------------ 
+% ------------------------------------------------------------------------
+%TODO: Verificar uma maneira de automatizar a impressão da ficha (algo como \imprimirficha)
+%TODO: Definir variáveis para as palavras-chaves
+%TODO: Verificar o que significa ': il. (algumas color.) ; 30 cm.'
+
+\begin{fichacatalografica}
+	\sffamily
+	\vspace*{\fill}					% Posição vertical
+	\begin{center}					% Minipage Centralizado
+		\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+				\small
+				\imprimirautor
+				%Sobrenome, Nome do autor
+				
+				\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+				\imprimirlocal, \imprimirdata-
+				
+				\hspace{0.5cm} \pageref{LastPage} p. : il. (algumas color.) ; 30 cm.\\
+				
+				\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+				
+				\hspace{0.5cm}
+				\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+					\imprimirdata.}\\
+				
+				\hspace{0.5cm}
+				1. Palavra-chave1.
+				2. Palavra-chave2.
+				2. Palavra-chave3.
+				I. Orientador.
+				II. Universidade xxx.
+				III. Faculdade de xxx.
+				IV. Título 			
+			\end{minipage}}
+		\end{center}
+	\end{fichacatalografica}

@@ -24,7 +24,7 @@
 %% da referida suíte.
 %% Mais informações em http://www.abntex.net.br/
 %% 
-%% Ultima atualização: 30-03-2017
+%% Ultima atualização: 11-04-2017
 %% Data de criação...: 30-03-2017
 
 % ------------------------------------------------------------------------------
@@ -45,14 +45,14 @@
 % Pelo que entendi serão as opções 'padrões' da classe 'ppgccufscar2'
 \PassOptionsToClass{
 	% -- opções da classe abntex2 --
-	chapter=TITLE,	% Títulos ficarão em maiúsculo
+	sumario=tradicional,	% Utiliza o sumário tradicional, ao invés da norma ABNT NBR 6027:2012
 	% -- opções da classe memoir --
-	12pt, 			% Tamanho da fonte
-	openright,		% capítulos começam em pág ímpar (insere página vazia caso preciso)
-	% twoside, 		% Para impressão em verso e anverso. Oposto a oneside
+	12pt, 			% Tamanho da fonte para todo o documento
+	openright,		% capítulos começam em pág ímpar (insere página vazia caso preciso). Não faz sentido para 'oneside'
+	oneside,		% Para impressão somente no anverso.
 	a4paper, 		% Tamanho do papel
 	% -- opções do pacote babel --
-	brazil 			% o último idioma é o principal do documento (neste caso é único)
+	brazil 			% o último idioma é o principal do documento (neste caso é único, não inserir mais para evitar warnings)
 }{abntex2}
 
 % -----------------------------------------------------------------------------
@@ -108,6 +108,7 @@
 \RequirePackage{color}				% Controle das cores
 \RequirePackage{graphicx}			% Inclusão de gráficos
 \RequirePackage{microtype} 			% para melhorias de justificação
+\RequirePackage{lastpage}			% Usado para obter a última página do arquivo e montar a ficha catalográfica
 % ---
 
 % ---
@@ -127,6 +128,9 @@
 \RequirePackage{makeidx}		% Produzir índice remissivo de palavras
 \RequirePackage{multicol}
 \RequirePackage{multirow}
+%TODO: criar variável booleana indicando se deve, ou não, carregar o pacote
+%\RequirePackage[style=index]{glossaries}	% Gerar o glossário
+%\makeglossaries
 
 % -----------------------------------------------------------------------------
 % Comandos gerais
@@ -134,6 +138,14 @@
 % Comando para definir a area de concentracao, p.ex.: Eng. Software, IA, PIS, etc
 \providecommand{\PPGareaconcentracao}{}
 \newcommand{\areaconcentracao}[1]{\renewcommand{\PPGareaconcentracao}{#1}}
+
+% comando para inserir sumário no documento
+\newcommand{\inserirsumario}{
+	\pdfbookmark[0]{\contentsname}{toc}
+	\tableofcontents*
+	\cleardoublepage
+}
+
 
 % -----------------------------------------------------------------------------
 % Comandos de dados
@@ -149,7 +161,10 @@
 \local{S\~ao Carlos -- SP}
 
 % -- Define o preambulo utilizado na folha de rosto
-\preambulo{\PPGtipodoc\ apresentada ao Programa de P\'os-Gradua\c{c}\~ao em Ci\^encia da Computa\c{c}\~ao da Universidade Federal de S\~ao Carlos, como parte dos requisitos para a obten\c{c}\~ao do t\'{\i}tulo de \PPGtipotitulo\ em Ci\^encia da Computa\c{c}\~ao, \'area de concentra\c{c}\~ao: \PPGareaconcentracao}
+\preambulo{\PPGtipodoc\ apresentada ao Programa de P\'os-Gradua\c{c}\~ao em Ci\^encia da Computa\c{c}\~ao da Universidade Federal de S\~ao Carlos, como parte dos requisitos para a obten\c{c}\~ao do t\'{\i}tulo de \PPGtipotitulo\ em Ci\^encia da Computa\c{c}\~ao, \'area de concentra\c{c}\~ao: \PPGareaconcentracao.}
+
+% redefine o título que antes era 'Lista de abreviaturas e siglas'
+\renewcommand{\listadesiglasname}{Lista de siglas}
 
 
 % -----------------------------------------------------------------------------
@@ -179,6 +194,16 @@
 	\fi
 }
 
+% Configuração das margens
+% Obs.: Os comandos abaixo são da classe Memoir. Para alcançar o valor
+%	estabelecido das margens: esquerda e superior = 3cm;
+%	direita e inferior = 2cm; na prática foi preciso ajudar os valores
+%	empiricamente como indicado abaixo. É preciso compreender melhor
+%	a classe Memoir a fim de ajustar o valor objetivamente.
+\setlrmarginsandblock{2.6cm}{1.6cm}{*}
+\setulmarginsandblock{2.7cm}{1.7cm}{*}
+\checkandfixthelayout
+
 % ------------------------------------------------------------------------------
 % Configurações de aparência do PDF final
 
@@ -197,7 +222,7 @@
 	colorlinks=true,       		% false: boxed links; true: colored links
 	linkcolor=blue,          	% color of internal links
 	citecolor=blue,        		% color of links to bibliography
-	filecolor=magenta,      		% color of file links
+	filecolor=magenta,      	% color of file links
 	urlcolor=blue,
 	bookmarksdepth=4
 }
@@ -243,60 +268,93 @@
 	\renewcommand\printchaptername{\chapnamefont \@chapapp}
 	% imprime o número do capítulo. '\thechapter' é o valor do rótulo, p. ex.: 'Capítulo 1'
 	\renewcommand\printchapternum{\chapnumfont \thechapter}
-	% ajusta a distância entre o rótulo e o texto do capitulo
+	% ajusta a distância entre o rótulo e o texto do capitulo	
 	%TODO: ajustar conforme estabelecido em 'ppgccufscar', pois a distância está menor.
 	\renewcommand\afterchapternum{\par}
+
 	% formatação do título do capítulo, conforme 'ppgccufscar', ou seja:
 	% alinhado à esquerda (raggedleft), grande (LARGE), fonte (bfseries), versalete (scshape)
-	\renewcommand{\chaptitlefont}{\LARGE\scshape\bfseries\raggedleft}
+	% obs.: retirei \raggedleft e o titulo 'referencias' voltou a ficar centralizado enquanto que
+	%	que os demais titulos (numerados) permaneceram alinhados à esquerda.
+	\renewcommand{\chaptitlefont}{\LARGE\scshape\bfseries}
 	% imprime o titulo do capitulo
 	\renewcommand\printchaptertitle[1]{\chaptitlefont ##1}
 	% ajusta posição e imprime a linha
-	\renewcommand{\afterchaptertitle}{\\[-20pt]\normalsize\sectionline\par\nobreak}
+	\renewcommand{\afterchaptertitle}{\\[-20pt]\normalsize\sectionline\par\nobreak}	
+	
+	% formatação do capítulo não numerado
+	% Obs2.: Não foi preciso alterar o \afterchaptertitle
+	% Obs.: O capitulo é centralizado, e altero o comando \afterchaptertitle.
+	%	Preciso verificar se \vspace{1cm} é suficiente.
+	%	\renewcommand{\afterchaptertitle}{\par\vspace{1cm}}
+	\renewcommand{\printchapternonum}{\centering}	
 }
 % Aplico o estilo de capitulo criado.
 \chapterstyle{ecdc}
+
+% -----------------------------------------------------------------------------
+% Sumário
+
+% Insere o travessão no sumário
+\renewcommand{\cftchapteraftersnum}{\hfill\textendash\hfill}
+
+% Insere espaço entre os itens do sumário de diferentes capítulos
+\setlength{\cftbeforechapterskip}{1.0em \@plus\p@}
+
+% altera a formatação dos capitulos
+% obs.: há um problema em colocar a fonte em caixa alta (uppercase) utilizando
+%	hyperref (hyperlinks). Não consegui resolver, por isso uso o \scshape
+%	por enquanto. Ver página 158 do manual da classe Memoir.
+%TODO: Alterar o formato dos capitulos, no sumario, para caixa alta
+\renewcommand{\cftchapterfont}{\large\bfseries\scshape}
+
+% insere a palavra 'Capítulo' antes do número
+\renewcommand*{\cftchaptername}{Cap\'itulo\space}
 
 
 % ------------------------------------------------------------------------------
 % Capa (item obrigatório, trata-se da capa externa do trabalho)
 % Redefine o comando \imprimircapa conforme configurações estabelecidas em 'ppgccufscar'
+% * Retirei o ambiente capa, por isso inclui o \cleardoublepage. Não sei o motivo de \titlingpage
 %TODO: Incluir verificação se os campos estão preenchidos, como no caso de co-orientador? 
 
 \makeatletter
 \renewcommand{\imprimircapa}{
 	\begin{capa}
-		\center
-		% imprime instituição e o detalhe da instituição
-		{\formatoinstituicao\imprimirinstituicao\par}
-		{\formatoinstituicaodetalhe\ABNTinstituicaodetalhe\par}
-		\vfill\vfill
-		
-		% imprime o titulo do trabalho
-		{\formatotitulo\imprimirtitulo\par}
-		\vfill
-
-		% imprime o nome do autor	
-		{\formatoautor\imprimirautor}
-		\vfill
-
-		% imprime o orientador do trabalho e co-orientador, se houver
-		{\formatoorientador\imprimirorientadorRotulo~ \imprimirorientador}
-		% se a macro \orientador não estive vazia (verifico isso mandando imprimi-la, \imprimircorientador)
-		\abntex@ifnotempty{\imprimircoorientador}{
-			{\formatoorientador\imprimircoorientadorRotulo~ \imprimircoorientador}
-		}
-		\vspace*{1cm}
-		\vfill\vfill\vfill
+		\begin{center}
 	
-		% imprime o local e data
-		\begin{SingleSpacing}
-			\setlength{\parskip}{.3cm}
-			{\formatodatalocal\imprimirlocal}\par
-			{\formatodatalocal\imprimirdata}
-		\end{SingleSpacing}
-		\vspace*{1cm}
+			% imprime instituição e o detalhe da instituição
+			{\formatoinstituicao\imprimirinstituicao\par}
+			{\formatoinstituicaodetalhe\ABNTinstituicaodetalhe\par}
+			\vfill\vfill
+			
+			% imprime o titulo do trabalho
+			{\formatotitulo\imprimirtitulo\par}
+			\vfill
+	
+			% imprime o nome do autor	
+			{\formatoautor\imprimirautor}
+			\vfill
+	
+			% imprime o orientador do trabalho e co-orientador, se houver
+			{\formatoorientador\imprimirorientadorRotulo~ \imprimirorientador}
+			% se a macro \orientador não estive vazia (verifico isso mandando imprimi-la, \imprimircorientador)
+			\abntex@ifnotempty{\imprimircoorientador}{
+				{\par\formatoorientador\imprimircoorientadorRotulo~ \imprimircoorientador}
+			}
+			\vspace*{1cm}
+			\vfill\vfill\vfill
+		
+			% imprime o local e data
+			\begin{SingleSpacing}
+				\setlength{\parskip}{.3cm}
+				{\formatodatalocal\imprimirlocal}\par
+				{\formatodatalocal\imprimirdata}
+			\end{SingleSpacing}
+			\vspace*{1cm}
+		\end{center}
 	\end{capa}
+	
 }
 \makeatother
 
@@ -307,43 +365,42 @@
 
 \makeatletter
 \renewcommand{\folhaderostocontent}{
-	\begin{capa}
-		\begin{center}
-			% imprime instituição e o detalhe da instituição
-			{\formatoinstituicao\imprimirinstituicao\par}
-			{\formatoinstituicaodetalhe\ABNTinstituicaodetalhe\par}
-			\vfill\vfill
-			
-			% imprime o titulo do trabalho
-			{\formatotitulo\imprimirtitulo\par}
-			\vfill
-			
-			% imprime o nome do autor	
-			{\formatoautor\imprimirautor}
-			\vfill
-		\end{center}
+	\begin{center}
+		% imprime instituição e o detalhe da instituição
+		{\formatoinstituicao\imprimirinstituicao\par}
+		{\formatoinstituicaodetalhe\ABNTinstituicaodetalhe\par}
+		\vfill\vfill
 		
-		% imprime o preâmbulo da folha de rosto (é o que diferencia da capa)
-		% segundo modelo 'ppgccufscar' não é impresso o nome dos co-orientadores nesta página, se houver.
-		\vspace{.8cm}
-		\hspace{.45\textwidth}
-		\begin{minipage}{.55\textwidth}
-			\begin{SingleSpacing}
-				{\imprimirpreambulo}\par
-				{\imprimirorientadorRotulo~ \imprimirorientador}
-			\end{SingleSpacing}
-		\end{minipage}
-		\vspace{.8cm}
-		\vfill\vfill\vfill
-		\center
-
-		% imprime o local e data
+		% imprime o titulo do trabalho
+		{\formatotitulo\imprimirtitulo\par}
+		\vfill
+		
+		% imprime o nome do autor	
+		{\formatoautor\imprimirautor}
+		\vfill
+	\end{center}
+	
+	% imprime o preâmbulo da folha de rosto (é o que diferencia da capa)
+	% segundo modelo 'ppgccufscar' não é impresso o nome dos co-orientadores nesta página, se houver.
+	\vspace{.8cm}
+	\noindent\hspace*{0.45\textwidth}
+	% O valor -3mm é empirico
+	\begin{minipage}{.55\textwidth - 3mm}
 		\begin{SingleSpacing}
-			\setlength{\parskip}{.3cm}
-			{\formatodatalocal\imprimirlocal}\par
-			{\formatodatalocal\imprimirdata}
+			{\imprimirpreambulo}\par
+			{\imprimirorientadorRotulo~ \imprimirorientador}
 		\end{SingleSpacing}
-		\vspace*{1cm}
-	\end{capa}
+	\end{minipage}
+	\vspace{.8cm}
+	\vfill\vfill\vfill
+	\center
+	
+	% imprime o local e data
+	\begin{SingleSpacing}
+		\setlength{\parskip}{.3cm}
+		{\formatodatalocal\imprimirlocal}\par
+		{\formatodatalocal\imprimirdata}
+	\end{SingleSpacing}
+	\vspace*{1cm}
 }
 \makeatother

@@ -1,33 +1,71 @@
-\documentclass[english, qualit]{ppgccufscar2}
+\documentclass[qualit]{ppgccufscar2}
 
-\usepackage{lipsum}
+% ------------------------------------------------------------------------------
+% Pacotes adicionais
+\usepackage{lipsum}		% Dummy text
+\usepackage{showframe}
+%\usepackage{layouts}	% Debug de margens e medidas
 
-\titulo{Exemplo de titulo grande para ocupar mais de uma linha xemplo de titulo grande para ocupar mais de uma linha}
-\autor{Fulano de Tal}
+% ------------------------------------------------------------------------------
+% Configurações gerais do documento
+\titulo{Modelo para elaboração de dissertações e teses do PPGCC-UFSCar com base na suíte abn\TeX2}
+\autor{Nome do aluno da Pós-Graduação}
 \orientador[Orientadora:]{Profa. Dra. Fulana de Tal}
 \coorientador[Co-orientador:]{Prof. Dr. Beltrano da Silva}
-\areaconcentracao{Engenharia de Software}
+\areaconcentracao{Processamento de Imagens e Sinais}
 \data{Abril, 2017}
 
-
+% ------------------------------------------------------------------------------
+% Inicio do documento
 \begin{document}
-	\selectlanguage{english}
-	\imprimircapa
-	\imprimirfolhaderosto
-	\textual
-	\chapter{Teste das opções}
-	\PPGtipodoc\ possui titulo \PPGtipotitulo.
-	\imprimirpreambulo
-	\chapter{Primeiro Capítulo}	
-	\lipsum \cite{2004_kitchenham}
-	Segundo \citeonline{2007_montebelo}, \lipsum
 	
-	\chapter{Segundo Capítulo}
-	Ainda de acordo com \citeonline{2004_kitchenham}, \lipsum
-	
-	\postextual
-	% ----------------------------------------------------------
-	% Referências bibliográficas
-	% ----------------------------------------------------------
-	\bibliography{refs-big-data}
+%\printinunitsof{mm}
+%\twocolumnlayoutfalse
+%\marginparswitchtrue
+%\currentpage
+%\pagedesign
+
+% -- imprime capa e folha de rosto (elementos obrigatórios)
+\imprimircapa
+\imprimirfolhaderosto
+
+% ------------------------------------------------------------------------------
+% Elementos pre-textuais. É obrigatório colocar o comando \pretextual
+\pretextual
+
+\input{pretextuais/ficha}					% Ficha catalográfica - obrigatório
+\input{pretextuais/errata}					% Errata - opcional
+\input{pretextuais/aprovacao}				% Folha de aprovação - obrigatório
+\input{pretextuais/dedicatoria}				% Dedicatória - opcional
+\input{pretextuais/agradecimentos}			% Agradecimentos - opcional
+\input{pretextuais/epigrafe}				% Epígrafe - opcional
+\input{pretextuais/resumo}					% Resumo em português - obrigatório
+\input{pretextuais/abstract}				% Resumo em inglês - obrigatório
+% Lista de figuras
+% Lista de tabelas
+% Lista de quadros
+% Lista de algoritmos
+\input{pretextuais/siglas}					% Lista de siglas
+\input{pretextuais/simbolos}				% Lista de símbolos
+
+\inserirsumario								% Insere sumário no documento - obrigatório
+
+% ------------------------------------------------------------------------------
+% Elementos textuais. É obrigatório colocar o comando \textual antes de iniciar.
+\textual
+
+\input{capitulos/introducao}		% Capítulo de introdução
+\input{capitulos/desenvolvimento}	% Capítulo de desenvolvimento
+\input{capitulos/conclusao}			% Capítulo de conclusão
+
+% ------------------------------------------------------------------------------
+% Elementos pós-textuais. É obrigatório colocar o comando \postextual antes de iniciar.
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+\bibliography{refs-big-data}
+
+
+
 \end{document}
