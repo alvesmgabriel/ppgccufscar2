@@ -146,6 +146,13 @@
 	\cleardoublepage
 }
 
+% comando para inserir lista de quadros
+\newcommand{\inserirlistadequadros}{
+	\pdfbookmark[0]{\listofquadrosname}{loq}
+	\listofquadros*
+	\cleardoublepage
+}
+
 
 % -----------------------------------------------------------------------------
 % Comandos de dados
@@ -193,6 +200,14 @@
 	Citado #1 vezes nas p\'aginas #2.
 	\fi
 }
+
+% -------
+% Espaçamentos entre linhas e parágrafos 
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
 % Configuração das margens
 % Obs.: Os comandos abaixo são da classe Memoir. Para alcançar o valor
@@ -404,3 +419,20 @@
 	\vspace*{1cm}
 }
 \makeatother
+
+% ------------------------------------------------------------------------------ 
+% Cria o ambiente QUADRO
+% Fonte: https://github.com/abntex/abntex2/wiki/HowToCriarNovoAmbienteListing
+% Criado em 22-02-2016, gabriel alves
+
+\newcommand{\quadroname}{Quadro}
+\newcommand{\listofquadrosname}{Lista de quadros}
+
+\newfloat[chapter]{quadro}{loq}{\quadroname}
+\newlistof{listofquadros}{loq}{\listofquadrosname}
+\newlistentry{quadro}{loq}{0}
+
+% configurações para atender às regras da ABNT
+\counterwithout{quadro}{chapter}
+\renewcommand{\cftquadroname}{\quadroname\space} 
+\renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
