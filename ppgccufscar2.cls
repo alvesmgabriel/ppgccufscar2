@@ -24,7 +24,7 @@
 %% da referida suíte.
 %% Mais informações em http://www.abntex.net.br/
 %% 
-%% Ultima atualização: 11-04-2017
+%% Ultima atualização: 25-04-2017
 %% Data de criação...: 30-03-2017
 
 % ------------------------------------------------------------------------------
@@ -42,7 +42,7 @@
 % diretamente para a classe abntex2.
 \DeclareOption* { \PassOptionsToClass {\CurrentOption} {abntex2} }
 
-% Pelo que entendi serão as opções 'padrões' da classe 'ppgccufscar2'
+% Opções 'padrões' da classe 'ppgccufscar2'
 \PassOptionsToClass{
 	% -- opções da classe abntex2 --
 	sumario=tradicional,	% Utiliza o sumário tradicional, ao invés da norma ABNT NBR 6027:2012
@@ -262,7 +262,6 @@
 % Memoir, base da classe abntex2, entra em conflito com o pacote 'fancyhdr'
 % utilizado na versão anterior da 'ppgccufscar' juntamente com o pacote 'fncychap'.
 % Portanto, ao reescrever deixei de importar os referidos pacotes que causavam conflito.
-%TODO: ajustar estilo para capítulos não numerados (\chapter*), como referências.
 
 % linha usada para separar o titulo da capitulo do texto
 \newcommand{\sectionline}{
@@ -423,7 +422,6 @@
 % ------------------------------------------------------------------------------ 
 % Cria o ambiente QUADRO
 % Fonte: https://github.com/abntex/abntex2/wiki/HowToCriarNovoAmbienteListing
-% Criado em 22-02-2016, gabriel alves
 
 \newcommand{\quadroname}{Quadro}
 \newcommand{\listofquadrosname}{Lista de quadros}
