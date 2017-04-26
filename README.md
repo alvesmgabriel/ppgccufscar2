@@ -37,14 +37,14 @@
 ### Funcionalidades
 Versão atual:
   * capa e folha de rosto de acordo com o modelo PPGCC-UFSCar;
-  * comandos para inclusão de listas de figuras, tabelas e quadros;
+  * comando para inclusão de quadros;
   * comando para inclusão de sumário;
   * criação do estilo de capítulos (numerado e não-numerado) de acordo com modelo PPGCC-UFSCar;
   * estilo do sumário com hyperlinks;
   * citação de referências bibliográficas com hyperlinks e indicação de quantas vezes foi citada.
 
 Próxima versão:
-  * criação de comandos para inclusão de lista de algoritmos;
+  * criação de comandos para inclusão de lista de figuras, tabelas e algoritmos;
   * facilitar a inclusão de ficha catalográfica e de aprovação;
   * verificar comportamento da inclusão de glossário, anexos, apêndices e índice remissivo;
   * adequar estilo de legendas de acordo com modelo PPGCC-UFSCar;
