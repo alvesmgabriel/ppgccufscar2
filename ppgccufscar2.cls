@@ -125,7 +125,7 @@
 % ---
 % Pacotes adicionais
 % ---
-\RequirePackage{makeidx}		% Produzir índice remissivo de palavras
+\RequirePackage{makeidx}					% Produzir índice remissivo de palavras
 \RequirePackage{multicol}
 \RequirePackage{multirow}
 %TODO: criar variável booleana indicando se deve, ou não, carregar o pacote
@@ -255,6 +255,10 @@
 \newcommand{\formatoautor}{\large\scshape\bfseries}							% autor do trabalho
 \newcommand{\formatoorientador}{\large\scshape\bfseries}					% orientador
 \newcommand{\formatodatalocal}{\large}										% data e local
+% \captionanemfont e \captiontitlefont são comandos da classe Memoir.
+% Aqui altero-os para formatar as legendas em negrito.
+\captionnamefont{\bfseries}													% rótulo da legenda (Figura, Tabela, etc)
+\captiontitlefont{\bfseries}												% corpo da legenda (descrição)
 
 % ------------------------------------------------------------------------------
 % Estilo da primeira página do capítulo (baseado em 'ppgccufscar')
