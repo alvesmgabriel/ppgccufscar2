@@ -31,3 +31,20 @@ Pode-se observar, ainda, que
 
 \lipsum[2]
 
+A Tabela \ref{tabela-ibge} é um exemplo de tabela no padrão IBGE cujo comando \texttt{IBGEtab} é fornecido pela classe abnTeX2.
+\begin{table}[htb]
+	\IBGEtab{
+		\caption{Tabela no padrão IBGE.}%
+		\label{tabela-ibge}
+	}{
+	\begin{tabular}{ccc}
+		\toprule
+		Nome & Nascimento & Documento \\
+		\midrule \midrule
+		Maria da Silva & 11/11/1111 & 111.111.111-11 \\
+		\bottomrule
+	\end{tabular}
+	}{
+		\fonte{Produzido pelos autores}
+	}
+\end{table}

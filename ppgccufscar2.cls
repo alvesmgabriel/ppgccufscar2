@@ -153,6 +153,12 @@
 	\cleardoublepage
 }
 
+% comando para inserir lista de tabelas
+\newcommand{\inserirlistadetabelas}{
+	\pdfbookmark[0]{\listtablename}{lot}
+	\listoftables*
+	\cleardoublepage
+}
 
 % -----------------------------------------------------------------------------
 % Comandos de dados
