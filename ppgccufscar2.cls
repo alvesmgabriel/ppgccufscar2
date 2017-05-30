@@ -160,6 +160,13 @@
 	\cleardoublepage
 }
 
+% comando para inserir lista de figuras
+\newcommand{\inserirlistadefiguras}{
+	\pdfbookmark[0]{\listfigurename}{lof}
+	\listoffigures*
+	\cleardoublepage	
+}
+
 % -----------------------------------------------------------------------------
 % Comandos de dados
 
@@ -179,7 +186,10 @@
 % redefine o título que antes era 'Lista de abreviaturas e siglas'
 \renewcommand{\listadesiglasname}{Lista de siglas}
 
-
+% redefine o título que antes era 'Lista de ilustrações' (precisa do \addto\captionsbrazil)
+\addto\captionsbrazil{
+	\renewcommand{\listfigurename}{Lista de figuras}
+}
 % -----------------------------------------------------------------------------
 % Configurações gerais
 % Essa seção é baseada no modelo acessado em https://github.com/cfgnunes/latex-cefetmg
