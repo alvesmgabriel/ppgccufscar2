@@ -23,6 +23,9 @@
 %% Associação Brasileira de Normas Técnicas (ABNT) e, portanto, é uma customização
 %% da referida suíte.
 %% Mais informações em http://www.abntex.net.br/
+%%
+%% Autores da 'primeira versão' (ppgccufscar):
+%%	Profa. Sandra Fabbri, Prof. Márcio, Daniel Beck e Daniel Bruno
 %% 
 %% Ultima atualização: 25-04-2017
 %% Data de criação...: 30-03-2017
