@@ -228,16 +228,6 @@
 % Controle do espaçamento entre um parágrafo e outro:
 \setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
-% Configuração das margens
-% Obs.: Os comandos abaixo são da classe Memoir. Para alcançar o valor
-%	estabelecido das margens: esquerda e superior = 3cm;
-%	direita e inferior = 2cm; na prática foi preciso ajudar os valores
-%	empiricamente como indicado abaixo. É preciso compreender melhor
-%	a classe Memoir a fim de ajustar o valor objetivamente.
-\setlrmarginsandblock{2.6cm}{1.6cm}{*}
-\setulmarginsandblock{2.7cm}{1.7cm}{*}
-\checkandfixthelayout
-
 % ------------------------------------------------------------------------------
 % Configurações de aparência do PDF final
 
