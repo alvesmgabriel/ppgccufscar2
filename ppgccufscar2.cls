@@ -112,6 +112,8 @@
 \RequirePackage{graphicx}			% Inclusão de gráficos
 \RequirePackage{microtype} 			% para melhorias de justificação
 \RequirePackage{lastpage}			% Usado para obter a última página do arquivo e montar a ficha catalográfica
+\RequirePackage{listings}                       % Usado para listas de códigos
+\RequirePackage{algorithm}                      % Usado para listas de algoritmos
 % ---
 
 % ---
@@ -170,6 +172,13 @@
 	\cleardoublepage	
 }
 
+% comando para inserir lista de código
+\renewcommand*{\lstlistingname}{Código}
+\renewcommand*{\lstlistlistingname}{Lista de códigos}
+\newcommand{\inserirlistadecodigos}{
+  \lstlistoflistings
+  \cleardoublepage
+}
 % -----------------------------------------------------------------------------
 % Comandos de dados
 
@@ -193,6 +202,7 @@
 \addto\captionsbrazil{
 	\renewcommand{\listfigurename}{Lista de figuras}
 }
+
 % -----------------------------------------------------------------------------
 % Configurações gerais
 % Essa seção é baseada no modelo acessado em https://github.com/cfgnunes/latex-cefetmg
@@ -251,6 +261,18 @@
 	bookmarksdepth=4
 }
 
+% ------------------------------------------------------------------------------
+% Configuração padrão do ambiente listings (código)
+
+\lstset{basicstyle=\ttfamily,
+	showstringspaces=false,
+	numbers=left,
+        frame=single,
+	numberfirstline=true,
+	numberstyle=\tiny,
+	numbersep=-10pt,
+	breaklines=true
+      }
 
 % ------------------------------------------------------------------------------
 % Fontes e formatos
@@ -447,3 +469,4 @@
 \counterwithout{quadro}{chapter}
 \renewcommand{\cftquadroname}{\quadroname\space} 
 \renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
+

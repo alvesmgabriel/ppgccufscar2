@@ -23,6 +23,12 @@ et lectus vestibulum urna fringilla ultrices \cite{2007_montebelo}.
 \subsection{Subseção 2}
 \lipsum[3]
 
+A seguir é apresentado um exemplo de código usando o ambiente \texttt{lstlisting}. O código \ref{lst:codigo} apresenta comandos, em \texttt{bash}, para criar um grupo e um usuário em linux.
+\begin{lstlisting}[language=bash, numbers=left, caption={Exemplo de código.}, label=lst:codigo]
+  sudo groupadd grupo
+  sudo useradd -g grupo -s /bin/bash -d /home/user -c "Usuario" -m user
+\end{lstlisting}
+
 \subsubsection{Subsubseção 1}
 Pode-se observar, ainda, que
 \begin{citacao}
